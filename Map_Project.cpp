@@ -1,20 +1,66 @@
-// Map_Project.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include "ScheduleItem.h"
+#include "Schedule.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    // Declare Schedule object
+    Schedule schedule;
+    // Open data file
+    std::ifstream file("STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv");
+    if (!file.is_open()) {
+        std::cerr << "Error opening file." << std::endl;
+        return 1;
+    }
+    // Initialize schedule from file
+    schedule.initSchedule(file);
+    file.close();
+
+    // Menu loop
+    int choice;
+    do {
+        std::cout << "\n1. Print schedule\n"
+            "2. Find by subject\n"
+            "3. Find by subject and catalog\n"
+            "4. Find by instructor's last name\n"
+            "5. Exit\n"
+            "Enter your choice: ";
+        std::cin >> choice;
+
+        switch (choice) {
+        case 1:
+            schedule.print();
+            break;
+        case 2: {
+            std::string subject;
+            std::cout << "Enter subject: ";
+            std::cin >> subject;
+            schedule.findBySubject(subject);
+            break;
+        }
+        case 3: {
+            std::string subject, catalog;
+            std::cout << "Enter subject: ";
+            std::cin >> subject;
+            std::cout << "Enter catalog: ";
+            std::cin >> catalog;
+            schedule.findBySubjectAndCatalog(subject, catalog);
+            break;
+        }
+        case 4: {
+            std::string lastName;
+            std::cout << "Enter instructor's last name: ";
+            std::cin >> lastName;
+            schedule.findByInstructor(lastName);
+            break;
+        }
+        case 5:
+            std::cout << "Exiting...";
+            break;
+        default:
+            std::cout << "Invalid choice. Please try again.";
+        }
+    } while (choice != 5);
+
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

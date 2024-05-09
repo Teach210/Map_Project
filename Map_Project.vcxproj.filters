@@ -19,4 +19,17 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ScheduleItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Schedule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="STEM - Summer 2022 Schedule of Classes as of 05-02-22(1).csv">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
